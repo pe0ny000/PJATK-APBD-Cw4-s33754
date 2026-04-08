@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LegacyRenewalApp.SubscriptionRenewalService;
+namespace LegacyRenewalApp.SubscriptionService;
 
 public class InvoiceValidator
 {
