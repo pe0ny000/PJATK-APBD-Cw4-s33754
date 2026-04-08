@@ -1,9 +1,17 @@
-﻿using System;
-
-namespace LegacyRenewalApp.SubscriptionService;
+﻿namespace LegacyRenewalApp.SubscriptionService;
 
 public class InvoiceNotificationService
 {
+    private readonly IBillingGateway _billingGateway;
+
+    public InvoiceNotificationService(IBillingGateway billingGateway)
+    {
+        _billingGateway = billingGateway;
+    }
+
+    public void SaveInvoice(RenewalInvoice invoice)
+        => _billingGateway.SaveInvoice(invoice);
+
     public void SendInvoiceEmail(Customer customer, RenewalInvoice invoice)
     {
         if (string.IsNullOrWhiteSpace(customer.Email))
@@ -13,12 +21,6 @@ public class InvoiceNotificationService
         string body = $"Hello {customer.FullName}, your renewal for plan {invoice.PlanCode} " +
                       $"has been prepared. Final amount: {invoice.FinalAmount:F2}.";
 
-        LegacyBillingGateway.SendEmail(customer.Email, subject, body);
+        _billingGateway.SendEmail(customer.Email, subject, body);
     }
-
-    public void SaveInvoice(RenewalInvoice invoice)
-    {
-        LegacyBillingGateway.SaveInvoice(invoice);
-    }
-    
 }
