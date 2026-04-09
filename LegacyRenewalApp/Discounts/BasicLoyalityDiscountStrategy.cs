@@ -1,4 +1,4 @@
-﻿namespace LegacyRenewalApp.SubscriptionService;
+﻿namespace LegacyRenewalApp.Discounts;
 
 public class BasicLoyaltyDiscountStrategy : IDiscountStrategy
 {
